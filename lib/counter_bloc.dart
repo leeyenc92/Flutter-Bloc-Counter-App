@@ -19,15 +19,11 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   Stream<CounterState> mapEventToState(
     CounterEvent event,
   ) async* {
+    final _currentState = currentState;
     if (event is IncrementEvent) {
-      yield state..counter += 1;
+      yield CounterState(counter: currentState + 1);
     } else if (event is DecrementEvent) {
-      yield state..counter -= 1;
+      yield CounterState(counter: currentState + 1);
     }
-  }
-
-  @override
-  Future<void> close() {
-    return super.close();
   }
 }
