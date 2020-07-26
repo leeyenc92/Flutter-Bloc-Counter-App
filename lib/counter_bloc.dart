@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio1/counter_event.dart';
-import 'package:portfolio1/counter_state.dart';
 
-class CounterBloc extends Bloc<CounterEvent, CounterState> {
+class CounterBloc extends Bloc<CounterEvent, int> {
   void onIncrement() {
     add(IncrementEvent());
   }
@@ -13,17 +12,16 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   }
 
   @override
-  CounterState get initialState => CounterState.initial();
+  CounterBloc() : super(0);
 
   @override
-  Stream<CounterState> mapEventToState(
+  Stream<int> mapEventToState(
     CounterEvent event,
   ) async* {
-    final _currentState = currentState;
     if (event is IncrementEvent) {
-      yield CounterState(counter: currentState + 1);
+      yield state + 1;
     } else if (event is DecrementEvent) {
-      yield CounterState(counter: currentState + 1);
+      yield state - 1;
     }
   }
 }

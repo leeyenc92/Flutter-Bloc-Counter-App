@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio1/counter_bloc.dart';
-import 'package:portfolio1/counter_state.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -44,24 +43,22 @@ class CounterWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: BlocBuilder(
-          bloc: BlocProvider.of<CounterBloc>(context),
-          builder: (context, CounterState state) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  Text(
-                    '${state.counter}',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
+      body: BlocBuilder<CounterBloc, int>(builder: (context, state) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
               ),
-            );
-          }),
+              Text(
+                '$state',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          ),
+        );
+      }),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
